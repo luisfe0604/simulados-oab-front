@@ -51,12 +51,9 @@ export default function Simulado() {
 
   async function generateSimulado() {
     const params = new URLSearchParams();
-
     if (subject) params.append("subject_id", subject);
     if (limit) params.append("limit", limit);
-
     const data = await apiFetch(`/questions/generate?${params.toString()}`);
-
     setQuestions(data);
     setAnswers({});
     setResult(null);
@@ -84,6 +81,10 @@ export default function Simulado() {
     setResult(null);
     setStartTime(Date.now());
     setElapsed(0);
+  }
+
+  function handleNewSimulado() {
+    window.location.reload();
   }
 
   async function loadRetrySimulado() {
@@ -303,7 +304,7 @@ export default function Simulado() {
               Finalizar Simulado
             </button>
           ) : (
-            <button onClick={generateSimulado} className={styles.finishBtn}>
+            <button onClick={handleNewSimulado} className={styles.finishBtn}>
               Gerar Novo Simulado
             </button>
           )}

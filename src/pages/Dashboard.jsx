@@ -31,7 +31,7 @@ export default function Dashboard() {
     const average =
       scores.map(Number).reduce((acc, curr) => acc + curr, 0) / total;
     const best = Math.max(...scores);
-    const last = scores[0]?.score || 0;
+    const last = scores[0] || 0;
 
     return {
       total,
