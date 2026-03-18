@@ -15,6 +15,12 @@ export default function Dashboard() {
     load();
   }, []);
 
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    navigate("/login")
+  }
+
   const stats = useMemo(() => {
     if (simulados.length === 0) {
       return {
