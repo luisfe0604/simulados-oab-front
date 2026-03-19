@@ -41,8 +41,9 @@ export default function Register() {
         },
       );
 
+      console.log(res)
+
       const checkout = await res.json();
-      console.log(checkout)
 
       // 🔥 4. redireciona pro Stripe
       window.location.href = checkout.url;
