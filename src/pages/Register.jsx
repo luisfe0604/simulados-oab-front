@@ -27,7 +27,7 @@ export default function Register() {
 
       // 🔥 3. cria checkout no backend
       const res = await fetch(
-        "https://simulados-oab-back.onrender.com/create-checkout-session",
+       `${import.meta.env.VITE_API_URL}/billing/create-checkout-session`,
         {
           method: "POST",
           headers: {
