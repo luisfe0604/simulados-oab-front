@@ -11,6 +11,7 @@
 
 .empty {
   background-color: var(--card-bg);
+  color: var(--text-color);
   padding: 20px;
   border-radius: 8px;
 }
