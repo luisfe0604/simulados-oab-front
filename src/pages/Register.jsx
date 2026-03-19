@@ -13,25 +13,38 @@ export default function Register() {
     e.preventDefault();
 
     try {
+      // 🔹 1. cria usuário
       const data = await apiFetch("/users/register", {
         method: "POST",
         body: JSON.stringify({ name, email, password }),
       });
 
+      // 🔥 2. salva token
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user_name", data.email);
-        navigate("/");
-        return;
       }
 
-      if (data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-        return;
-      }
+      // 🔥 3. cria checkout no backend
+      const res = await fetch(
+        "https://simulados-oab-back.onrender.com/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.token}`, // 👈 importante se usar auth
+          },
+          body: JSON.stringify({
+            userId: data.user?.id, // ou data.id dependendo do retorno
+            email: data.email,
+          }),
+        },
+      );
 
-      navigate("/login");
+      const checkout = await res.json();
 
+      // 🔥 4. redireciona pro Stripe
+      window.location.href = checkout.url;
     } catch {
       alert("Erro ao criar conta");
     }
@@ -41,9 +54,7 @@ export default function Register() {
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <h1 className={styles.title}>Criar conta</h1>
-        <p className={styles.subtitle}>
-          Comece seu teste gratuito de 7 dias
-        </p>
+        <p className={styles.subtitle}>Comece seu teste gratuito de 7 dias</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
