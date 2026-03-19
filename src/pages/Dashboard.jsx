@@ -17,10 +17,6 @@ export default function Dashboard() {
 
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    navigate("/login")
-  }
-
   const stats = useMemo(() => {
     if (simulados.length === 0) {
       return {

@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 200px;
-  height: 100vh;
+  height: 100dvh;
   background-color: #0f172a;
   color: white;
   padding: 20px;
@@ -57,7 +57,6 @@
 .logoutBtn:hover {
   background-color: #dc2626;
 }
-
 
 @media (max-width: 1024px) {
   .sidebar {

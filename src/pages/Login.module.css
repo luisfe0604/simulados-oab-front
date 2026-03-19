@@ -54,6 +54,7 @@
   border: 1px solid #cbd5e1;
   font-size: 14px;
   transition: 0.2s;
+  width: 93%;
 }
 
 .inputGroup input:focus {
@@ -118,9 +119,7 @@
   cursor: pointer;
 }
 
-
 @media (max-width: 768px) {
-
   .card {
     padding: 30px;
   }
@@ -138,9 +137,7 @@
   }
 }
 
-
 @media (max-width: 480px) {
-
   .wrapper {
     padding: 15px;
   }
@@ -161,7 +158,6 @@
   .inputGroup input {
     padding: 9px 10px;
     font-size: 13px;
-    width: 93%;
   }
 
   .button,
@@ -170,5 +166,4 @@
     padding: 10px;
     font-size: 14px;
   }
-
 }
