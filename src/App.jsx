@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import AuthSuccess from "./pages/AuthSuccess";
 import PrivateRoute from "./components/ProtectedRoutes";
 import Register from "./pages/Register";
-import Conta from "./pages/Conta";
+import Conta from "./pages/Register";
 
 export default function App() {
   return (
@@ -49,8 +49,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
-      </Route>
-      <Route
+        <Route
           path="/conta"
           element={
             <PrivateRoute>
@@ -58,6 +57,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
+      </Route>
     </Routes>
   );
 }
