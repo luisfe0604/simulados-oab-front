@@ -28,7 +28,7 @@ export default function Conta() {
 
   async function handleSubscribe() {
     try {
-      const data = await apiFetch("/billing/subscription/checkout", {
+      const data = await apiFetch("/billing/create-checkout-session", {
         method: "POST",
       });
 
