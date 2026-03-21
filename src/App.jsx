@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import AuthSuccess from "./pages/AuthSuccess";
 import PrivateRoute from "./components/ProtectedRoutes";
 import Register from "./pages/Register";
-import Conta from "./pages/Register";
+import Conta from "./pages/Conta";
 
 export default function App() {
   return (
