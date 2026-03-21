@@ -98,9 +98,9 @@ export default function Conta() {
           <label>Expira em</label>
           <input
             value={
-              subscription.current_period_end
+              subscription.subscription_cancelled_at
                 ? new Date(
-                    subscription.current_period_end
+                    subscription.subscription_cancelled_at
                   ).toLocaleDateString()
                 : "-"
             }
