@@ -61,51 +61,57 @@ export default function Conta() {
   }
 
   const isActive = ["active", "trialing"].includes(
-    subscription.subscription_status
+    subscription.subscription_status,
   );
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <h1 className={styles.title}>Minha Conta</h1>
-        <p className={styles.subtitle}>
-          Gerencie sua assinatura e seus dados
-        </p>
+        <p className={styles.subtitle}>Gerencie sua assinatura e seus dados</p>
 
         {/* USUÁRIO */}
-        <div className={styles.inputGroup}>
-          <label>Nome</label>
-          <input value={user.name} disabled />
-        </div>
+        <div className={styles.grid}>
+          <div className={styles.inputGroup}>
+            <label>Nome</label>
+            <input value={user.name} disabled />
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label>Email</label>
-          <input value={user.email} disabled />
-        </div>
+          <div className={styles.inputGroup}>
+            <label>Email</label>
+            <input value={user.email} disabled />
+          </div>
 
-        {/* ASSINATURA */}
-        <div className={styles.inputGroup}>
-          <label>Status</label>
-          <input value={subscription.subscription_status} disabled />
-        </div>
+          {/* ASSINATURA */}
+          <div className={styles.inputGroup}>
+            <div className={styles.statusRow}>
+              <span>Status</span>
+              <span
+                className={`${styles.status} ${styles[subscription.subscription_status]}`}
+              >
+                {subscription.subscription_status}
+              </span>
+            </div>
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label>Plano</label>
-          <input value={subscription.plan} disabled />
-        </div>
+          <div className={styles.inputGroup}>
+            <label>Plano</label>
+            <input value={subscription.plan} disabled />
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label>Expira em</label>
-          <input
-            value={
-              subscription.subscription_cancelled_at
-                ? new Date(
-                    subscription.subscription_cancelled_at
-                  ).toLocaleDateString()
-                : "-"
-            }
-            disabled
-          />
+          <div className={styles.inputGroup}>
+            <label>Expira em</label>
+            <input
+              value={
+                subscription.subscription_cancelled_at
+                  ? new Date(
+                      subscription.subscription_cancelled_at,
+                    ).toLocaleDateString()
+                  : "-"
+              }
+              disabled
+            />
+          </div>
         </div>
 
         {/* AÇÕES */}

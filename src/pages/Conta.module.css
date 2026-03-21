@@ -1,72 +1,78 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 18px;
 }
 
-/* Título */
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .title {
-  font-size: 26px;
+  font-size: 22px;
   color: var(--text-color);
 }
 
 .subtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted-text);
 }
 
-/* Card principal */
+/* Card */
 .card {
   background: var(--card-bg);
   border-radius: 10px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* Seções */
-.section {
-  display: flex;
-  flex-direction: column;
+/* GRID compacto */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 
-.sectionTitle {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-/* Inputs estilo display */
+/* Input menor */
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 
 .inputGroup label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted-text);
 }
 
 .inputGroup input {
-  padding: 10px;
+  padding: 8px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
   background: var(--page-section-bg);
   color: var(--text-color);
-  font-size: 14px;
+  font-size: 13px;
 }
 
-/* Status */
+/* Status inline */
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .status {
-  padding: 6px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  width: fit-content;
 }
 
 /* Status cores */
@@ -93,17 +99,18 @@
 /* Botões */
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .primaryButton {
-  padding: 10px 14px;
+  padding: 8px 12px;
   border: none;
   border-radius: 6px;
   background: var(--primary);
   color: white;
   cursor: pointer;
+  font-size: 13px;
   transition: background 0.2s;
 }
 
@@ -112,84 +119,71 @@
 }
 
 .secondaryButton {
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
   background: var(--chip-bg);
   color: var(--text-color);
   cursor: pointer;
-  transition: background 0.2s;
-}
-
-.secondaryButton:hover {
-  background: var(--chip-hover);
+  font-size: 13px;
 }
 
 .dangerButton {
-  padding: 10px 14px;
+  padding: 8px 12px;
   border: none;
   border-radius: 6px;
   background: var(--danger-bg);
   color: var(--danger-text);
   cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.dangerButton:hover {
-  opacity: 0.8;
+  font-size: 13px;
 }
 
 /* Aviso */
 .warning {
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
   background: var(--chip-bg);
   color: var(--text-color);
-  font-size: 13px;
+  font-size: 12px;
 }
 
-/* Empty state */
-.empty {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  padding: 20px;
-  border-radius: 8px;
+.button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Responsivo */
-@media (max-width: 1024px) {
-  .title {
-    font-size: 22px;
-  }
-}
-
 @media (max-width: 768px) {
-  .container {
-    gap: 18px;
-  }
-
-  .title {
-    font-size: 20px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  .primaryButton,
-  .secondaryButton,
-  .dangerButton {
-    font-size: 13px;
-    padding: 8px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 18px;
-  }
-
-  .card {
-    padding: 14px;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
