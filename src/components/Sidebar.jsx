@@ -19,6 +19,7 @@ export default function Sidebar({ open }) {
             <NavItem to="/" label="Dashboard" />
             <NavItem to="/simulado" label="Novo Simulado" />
             <NavItem to="/historico" label="Histórico" />
+            <NavItem to="/conta" label="Conta" />
           </nav>
         </div>
 
