@@ -26,8 +26,8 @@ export default function Sidebar({ open }) {
         <div>
           <span className={styles.modeDescription}>
             Dúvidas:{" "}
-            <a href="mailto:seuemail@email.com?subject=Ajuda&body=Olá, preciso de suporte">
-              seuemail@email.com
+            <a href="mailto:contato.jurisaprova@gmail.com?subject=Ajuda&body=Olá, preciso de suporte">
+              contato.jurisaprova@gmail.com
             </a>
           </span>
           <button className={styles.logoutBtn} onClick={handleLogout}>
