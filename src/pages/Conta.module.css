@@ -69,6 +69,10 @@
   border: 1px solid var(--border-color);
 }
 
+.plano::first-letter {
+  text-transform: uppercase;
+}
+
 /* Status inline */
 .statusRow {
   display: flex;
