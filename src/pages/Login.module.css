@@ -119,6 +119,33 @@
   cursor: pointer;
 }
 
+/* erro */
+.errorBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  background: var(--danger-bg);
+  color: var(--danger-text);
+
+  border: 1px solid var(--danger-text);
+  font-size: 13px;
+}
+
+/* sucesso */
+.successBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  background: var(--success-bg);
+  color: var(--success-text);
+
+  border: 1px solid var(--success-text);
+  font-size: 13px;
+}
+
+
 @media (max-width: 768px) {
   .card {
     padding: 30px;

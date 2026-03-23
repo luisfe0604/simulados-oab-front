@@ -205,6 +205,47 @@
   padding-top: 10px;
 }
 
+.warningBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
+  border-radius: 10px;
+
+  background: var(--chip-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+
+  font-size: 13px;
+}
+
+.warningBox p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.warningButton {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+
+  background: var(--danger-text);
+  color: white;
+
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+
+  transition: opacity 0.2s;
+}
+
+.warningButton:hover {
+  opacity: 0.85;
+}
+
 @media (max-width: 1024px) {
   .title {
     font-size: 22px;

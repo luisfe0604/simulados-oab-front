@@ -5,17 +5,27 @@ import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
   const [simulados, setSimulados] = useState([]);
+  const [subscription, setSubscription] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
-      const data = await apiFetch("/simulados");
-      setSimulados(data.data || []);
+      try {
+        const data = await apiFetch("/simulados");
+        const sub = await apiFetch("/billing/subscription");
+
+        setSimulados(data.data || []);
+        setSubscription(sub);
+      } catch (err) {
+        console.error(err);
+      }
     }
     load();
   }, []);
 
-  const token = localStorage.getItem("token");
+  const isActive = ["active", "trialing"].includes(
+    subscription?.subscription_status,
+  );
 
   const stats = useMemo(() => {
     if (simulados.length === 0) {
@@ -54,6 +64,25 @@ export default function Dashboard() {
           + Novo Simulado
         </button>
       </div>
+
+      {!isActive && (
+        <div className={styles.warningBox}>
+          <div>
+            <strong>Acesso limitado</strong>
+            <p>
+              Assine para desbloquear todos os simulados e
+              recursos.
+            </p>
+          </div>
+
+          <button
+            className={styles.warningButton}
+            onClick={() => navigate("/conta")}
+          >
+            Assinar agora
+          </button>
+        </div>
+      )}
 
       <div className={styles.cards}>
         <StatCard label="Total de Simulados" value={stats.total} />

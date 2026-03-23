@@ -15,6 +15,7 @@ export default function Simulado() {
   const [elapsed, setElapsed] = useState(0);
   const [mode, setMode] = useState("custom");
   const [showNavigator, setShowNavigator] = useState(false);
+  const [subscription, setSubscription] = useState(null);
 
   const { id } = useParams();
 
@@ -26,7 +27,9 @@ export default function Simulado() {
     }
     async function loadSubjects() {
       const data = await apiFetch("/subjects");
+      const sub = await apiFetch("/billing/subscription");
       setSubjects(data);
+      setSubscription(sub);
     }
 
     loadSubjects();
@@ -107,6 +110,10 @@ export default function Simulado() {
     setAnswers({ ...answers, [id]: option });
   }
 
+  const isActive = ["active", "trialing"].includes(
+    subscription?.subscription_status,
+  );
+
   async function finish() {
     const payload = {
       duration_seconds: elapsed,
@@ -126,6 +133,25 @@ export default function Simulado() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Novo Simulado</h1>
+
+      {!isActive && (
+        <div className={styles.warningBox}>
+          <div>
+            <strong>Acesso limitado</strong>
+            <p>
+              Assine o plano Premium para desbloquear todos os simulados e
+              recursos.
+            </p>
+          </div>
+
+          <button
+            className={styles.warningButton}
+            onClick={() => navigate("/conta")}
+          >
+            Assinar agora
+          </button>
+        </div>
+      )}
 
       <div className={styles.simuladoModes}>
         <div

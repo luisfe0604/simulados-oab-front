@@ -11,13 +11,16 @@ export default function Historico() {
   const [sortDirection, setSortDirection] = useState("desc");
   const [activeFilter, setActiveFilter] = useState("all");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [subscription, setSubscription] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
       const data = await apiFetch("/simulados");
+      const sub = await apiFetch("/billing/subscription");
       setSimulados(data.data || []);
+      setSubscription(sub);
     }
     load();
   }, []);
@@ -108,6 +111,10 @@ export default function Historico() {
     navigate(`/simulado/refazer/${simuladoId}`);
   }
 
+  const isActive = ["active", "trialing"].includes(
+    subscription?.subscription_status,
+  );
+
   function renderMobileCards() {
     return (
       <div className={styles.cards}>
@@ -172,6 +179,25 @@ export default function Historico() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Histórico de Simulados</h1>
+
+      {!isActive && (
+        <div className={styles.warningBox}>
+          <div>
+            <strong>Acesso limitado</strong>
+            <p>
+              Assine o plano Premium para desbloquear todos os simulados e
+              recursos.
+            </p>
+          </div>
+
+          <button
+            className={styles.warningButton}
+            onClick={() => navigate("/conta")}
+          >
+            Assinar agora
+          </button>
+        </div>
+      )}
 
       <div className={styles.chips}>
         <button
