@@ -146,7 +146,7 @@ export default function Conta() {
 
           {subscription.cancel_at_period_end && (
             <button
-              className={styles.registerButton}
+              className={styles.button}
               onClick={handleReactivate}
             >
               Reativar assinatura

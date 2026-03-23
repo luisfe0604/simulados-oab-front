@@ -78,7 +78,14 @@ export default function Login() {
           Criar conta
         </button>
 
-        <button onClick={loginWithGoogle}>Continuar com Google</button>
+        <button className={styles.googleButton} onClick={loginWithGoogle}>
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            className={styles.googleIcon}
+          />
+          Continuar com Google
+        </button>
       </div>
     </div>
   );
