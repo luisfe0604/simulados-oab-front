@@ -46,6 +46,7 @@
 .modeDescription {
   font-size: 13px;
   color: var(--text-muted);
+  margin-bottom: 15px;
 }
 
 .logoutBtn {
