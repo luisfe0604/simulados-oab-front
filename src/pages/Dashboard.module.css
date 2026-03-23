@@ -91,7 +91,7 @@
   border-radius: 6px;
   border: none;
 
-  background: var(--danger-text);
+  background: var(--danger);
   color: white;
 
   cursor: pointer;

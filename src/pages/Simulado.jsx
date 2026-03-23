@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiFetch } from "../services/api";
 import QuestionCard from "../components/QuestionCard";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Simulado.module.css";
 
 export default function Simulado() {
@@ -16,6 +17,8 @@ export default function Simulado() {
   const [mode, setMode] = useState("custom");
   const [showNavigator, setShowNavigator] = useState(false);
   const [subscription, setSubscription] = useState(null);
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
