@@ -24,10 +24,10 @@ export default function Sidebar({ open }) {
         </div>
 
         <div>
+          <span>Dúvidas: tteste@teste.com</span>
           <button className={styles.logoutBtn} onClick={handleLogout}>
             Logout
           </button>
-          <span>Dúvidas: tteste@teste.com</span>
         </div>
       </div>
     </>
