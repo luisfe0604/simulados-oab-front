@@ -24,7 +24,7 @@ export default function Sidebar({ open }) {
         </div>
 
         <div>
-          <span>Dúvidas: tteste@teste.com</span>
+          <span className={styles.modeDescription}>Dúvidas: teste@teste.com</span>
           <button className={styles.logoutBtn} onClick={handleLogout}>
             Logout
           </button>

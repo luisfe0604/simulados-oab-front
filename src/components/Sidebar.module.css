@@ -43,6 +43,11 @@
   display: none;
 }
 
+.modeDescription {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
 .logoutBtn {
   margin-bottom: 20%;
   padding: 8px 16px;
