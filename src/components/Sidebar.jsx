@@ -23,9 +23,12 @@ export default function Sidebar({ open }) {
           </nav>
         </div>
 
-        <button className={styles.logoutBtn} onClick={handleLogout}>
-          Logout
-        </button>
+        <div>
+          <button className={styles.logoutBtn} onClick={handleLogout}>
+            Logout
+          </button>
+          <span>Dúvidas: tteste@teste.com</span>
+        </div>
       </div>
     </>
   );
