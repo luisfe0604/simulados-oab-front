@@ -58,7 +58,7 @@
   color: var(--muted-text);
 }
 
-.value {
+.value .valuePlan {
   font-size: 14px;
   font-weight: 500;
   color: var(--text-color);
@@ -69,7 +69,7 @@
   border: 1px solid var(--border-color);
 }
 
-.plano::first-letter {
+.valuePlan::first-letter {
   text-transform: uppercase;
 }
 

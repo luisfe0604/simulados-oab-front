@@ -102,7 +102,7 @@ export default function Conta() {
 
           <div className={styles.field}>
             <span className={styles.label}>Plano</span>
-            <span className={styles.value.plano}>{subscription.plan}</span>
+            <span className={styles.valuePlan}>{subscription.plan}</span>
           </div>
 
           <div className={styles.field}>
