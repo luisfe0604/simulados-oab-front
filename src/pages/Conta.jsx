@@ -6,10 +6,23 @@ export default function Conta() {
   const [user, setUser] = useState(null);
   const [subscription, setSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (error || success) {
+      const timer = setTimeout(() => {
+        setError(null);
+        setSuccess(null);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error, success]);
 
   async function loadData() {
     try {
@@ -20,7 +33,7 @@ export default function Conta() {
       setUser(me);
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar dados");
+      setError("Erro ao carregar dados");
     } finally {
       setLoading(false);
     }
@@ -31,10 +44,12 @@ export default function Conta() {
       const data = await apiFetch("/billing/create-checkout-session", {
         method: "POST",
       });
-
+      setSuccess("Assinatura atualizada com sucesso");
+      setError(null);
+      setSuccess(null);
       window.location.href = data.url;
     } catch {
-      alert("Erro ao iniciar assinatura");
+      setError("Erro ao iniciar assinatura");
     }
   }
 
@@ -42,11 +57,15 @@ export default function Conta() {
     if (!window.confirm("Tem certeza que deseja cancelar?")) return;
 
     await apiFetch("/billing/subscription/cancel", { method: "POST" });
+    setError(null);
+    setSuccess(null);
     loadData();
   }
 
   async function handleReactivate() {
     await apiFetch("/billing/subscription/reactivate", { method: "POST" });
+    setError(null);
+    setSuccess(null);
     loadData();
   }
 
@@ -107,11 +126,15 @@ export default function Conta() {
           </div>
         </div>
 
+        {error && <div className={styles.errorBox}>{error}</div>}
+
+        {success && <div className={styles.successBox}>{success}</div>}
+
         {/* AÇÕES */}
         <div style={{ marginTop: 20 }}>
           {!isActive && (
             <button className={styles.button} onClick={handleSubscribe}>
-              Assinar Premium
+              Assinar
             </button>
           )}
 

@@ -6,6 +6,7 @@ import styles from "./Login.module.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -22,7 +23,7 @@ export default function Login() {
 
       navigate("/");
     } catch {
-      alert("Credenciais inválidas");
+      setError("Credenciais inválidas");
     }
   }
 
@@ -58,6 +59,8 @@ export default function Login() {
               required
             />
           </div>
+
+          {error && <div className={styles.errorBox}>{error}</div>}
 
           <button type="submit" className={styles.button}>
             Entrar

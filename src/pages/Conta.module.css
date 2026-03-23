@@ -15,6 +15,7 @@
 .title {
   font-size: 22px;
   font-weight: 600;
+  color: var(--text-color);
 }
 
 .subtitle {
@@ -25,6 +26,7 @@
 /* Card */
 .card {
   background: var(--card-bg);
+  color: var(--text-color);
   border-radius: 10px;
   padding: 16px;
   box-shadow: var(--card-shadow);
@@ -180,6 +182,32 @@
   color: var(--text-color);
   font-size: 12px;
   border: 1px solid var(--border-color);
+}
+
+/* erro */
+.errorBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  background: var(--danger-bg);
+  color: var(--danger-text);
+
+  border: 1px solid var(--danger-text);
+  font-size: 13px;
+}
+
+/* sucesso */
+.successBox {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  background: var(--success-bg);
+  color: var(--success-text);
+
+  border: 1px solid var(--success-text);
+  font-size: 13px;
 }
 
 /* Responsivo */
