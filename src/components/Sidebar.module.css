@@ -65,12 +65,13 @@
 }
 
 a {
-  color: var(--primary);
   text-decoration: none;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
 a:hover {
+  color: var(--primary);
   text-decoration: underline;
 }
 
