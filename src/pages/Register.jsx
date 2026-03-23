@@ -24,26 +24,7 @@ export default function Register() {
         localStorage.setItem("user_name", data.email);
       }
 
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/billing/create-checkout-session`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${data.token}`,
-          },
-          body: JSON.stringify({
-            userId: data.user?.id,
-            email: data.email,
-          }),
-        },
-      );
-
-      console.log(res);
-
-      const checkout = await res.json();
-
-      window.location.href = checkout.url;
+      navigate("/");
     } catch {
       setError("Erro ao criar conta");
     }
@@ -53,7 +34,9 @@ export default function Register() {
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <h1 className={styles.title}>Criar conta</h1>
-        <p className={styles.subtitle}>Comece seu teste gratuito de 7 dias</p>
+        <p className={styles.subtitle}>
+          Comece seu teste gratuito de 7 dias após assinar
+        </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
