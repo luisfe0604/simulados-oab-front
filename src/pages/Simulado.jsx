@@ -17,6 +17,7 @@ export default function Simulado() {
   const [mode, setMode] = useState("custom");
   const [showNavigator, setShowNavigator] = useState(false);
   const [subscription, setSubscription] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -118,21 +119,32 @@ export default function Simulado() {
   );
 
   async function finish() {
-    const payload = {
-      duration_seconds: elapsed,
-      answers: questions.map((q) => ({
-        question_id: q.id,
-        selected_option: answers[q.id] || "",
-      })),
-    };
+    if (submitting) return;
 
-    const data = await apiFetch("/simulados", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
+    setSubmitting(true);
 
-    setResult(data);
+    try {
+      const payload = {
+        duration_seconds: elapsed,
+        answers: questions.map((q) => ({
+          question_id: q.id,
+          selected_option: answers[q.id] || "",
+        })),
+      };
+
+      const data = await apiFetch("/simulados", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+
+      setResult(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
   }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Novo Simulado</h1>
@@ -327,7 +339,7 @@ export default function Simulado() {
           {!result ? (
             <button
               onClick={finish}
-              disabled={Object.keys(answers).length === 0}
+              disabled={Object.keys(answers).length === 0 || submitting}
               className={styles.finishBtn}
             >
               Finalizar Simulado
