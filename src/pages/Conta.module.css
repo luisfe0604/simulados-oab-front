@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   color: var(--text-color);
 }
 
@@ -14,7 +14,7 @@
 
 .title {
   font-size: 22px;
-  color: var(--text-color);
+  font-weight: 600;
 }
 
 .subtitle {
@@ -30,7 +30,7 @@
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 /* GRID compacto */
@@ -40,40 +40,54 @@
   gap: 12px;
 }
 
-/* Input menor */
-.inputGroup {
+/* FIELD (substitui input) */
+.field {
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-.inputGroup label {
-  font-size: 12px;
+.fieldFull {
+  grid-column: span 2;
+}
+
+.label {
+  font-size: 11px;
   color: var(--muted-text);
 }
 
-.inputGroup input {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  background: var(--page-section-bg);
+.value {
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-color);
-  font-size: 13px;
+
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--page-section-bg);
+  border: 1px solid var(--border-color);
 }
 
 /* Status inline */
 .statusRow {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  align-items: center;
+
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--page-section-bg);
+  border: 1px solid var(--border-color);
+
+  font-size: 13px;
 }
 
+/* Badge */
 .status {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 /* Status cores */
@@ -97,57 +111,14 @@
   color: var(--muted-text);
 }
 
-/* Botões */
+/* Ações */
 .actions {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.primaryButton {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background 0.2s;
-}
-
-.primaryButton:hover {
-  background: var(--primary-hover);
-}
-
-.secondaryButton {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  background: var(--chip-bg);
-  color: var(--text-color);
-  cursor: pointer;
-  font-size: 13px;
-}
-
-.dangerButton {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  background: var(--danger-bg);
-  color: var(--danger-text);
-  cursor: pointer;
-  font-size: 13px;
-}
-
-/* Aviso */
-.warning {
-  padding: 10px;
-  border-radius: 8px;
-  background: var(--chip-bg);
-  color: var(--text-color);
-  font-size: 12px;
-}
-
+/* Botão padrão */
 .button {
   padding: 8px 14px;
   border: none;
@@ -179,12 +150,45 @@
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
+}
+
+/* Variações */
+.buttonSecondary {
+  background: var(--chip-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.buttonSecondary:hover {
+  background: var(--chip-hover);
+}
+
+.buttonDanger {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+.buttonDanger:hover {
+  opacity: 0.85;
+}
+
+/* Aviso */
+.warning {
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--chip-bg);
+  color: var(--text-color);
+  font-size: 12px;
+  border: 1px solid var(--border-color);
 }
 
 /* Responsivo */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .fieldFull {
+    grid-column: span 1;
   }
 }

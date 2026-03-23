@@ -19,8 +19,6 @@ export default function Register() {
         body: JSON.stringify({ name, email, password }),
       });
 
-      console.log(data)
-
       // 🔥 2. salva token
       if (data.token) {
         localStorage.setItem("token", data.token);

@@ -70,47 +70,40 @@ export default function Conta() {
         <h1 className={styles.title}>Minha Conta</h1>
         <p className={styles.subtitle}>Gerencie sua assinatura e seus dados</p>
 
-        {/* USUÁRIO */}
         <div className={styles.grid}>
-          <div className={styles.inputGroup}>
-            <label>Nome</label>
-            <input value={user.name} disabled />
+          <div className={styles.field}>
+            <span className={styles.label}>Nome</span>
+            <span className={styles.value}>{user.name}</span>
           </div>
 
-          <div className={styles.inputGroup}>
-            <label>Email</label>
-            <input value={user.email} disabled />
+          <div className={styles.field}>
+            <span className={styles.label}>Email</span>
+            <span className={styles.value}>{user.email}</span>
           </div>
 
-          {/* ASSINATURA */}
-          <div className={styles.inputGroup}>
+          <div className={styles.field}>
+            <span className={styles.label}>Plano</span>
+            <span className={styles.value}>{subscription.plan}</span>
+          </div>
+
+          <div className={styles.field}>
+            <span className={styles.label}>Expira em</span>
+            <span className={styles.value}>
+              {subscription.current_period_end
+                ? new Date(subscription.current_period_end).toLocaleDateString()
+                : "-"}
+            </span>
+          </div>
+
+          <div className={styles.fieldFull}>
             <div className={styles.statusRow}>
-              <span>Status</span>
+              <span className={styles.label}>Status</span>
               <span
                 className={`${styles.status} ${styles[subscription.subscription_status]}`}
               >
                 {subscription.subscription_status}
               </span>
             </div>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>Plano</label>
-            <input value={subscription.plan} disabled />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label>Expira em</label>
-            <input
-              value={
-                subscription.subscription_cancelled_at
-                  ? new Date(
-                      subscription.subscription_cancelled_at,
-                    ).toLocaleDateString()
-                  : "-"
-              }
-              disabled
-            />
           </div>
         </div>
 
