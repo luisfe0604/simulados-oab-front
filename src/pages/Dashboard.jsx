@@ -32,24 +32,38 @@ export default function Dashboard() {
       return {
         total: 0,
         average: 0,
-        best: 0,
-        last: 0,
+        totalQuestions: 0,
+        avgTimePerQuestion: 0,
       };
     }
 
-    const scores = simulados.map((s) => s.score);
+    const scores = simulados.map((s) => Number(s.score));
 
     const total = scores.length;
-    const average =
-      scores.map(Number).reduce((acc, curr) => acc + curr, 0) / total;
-    const best = Math.max(...scores);
-    const last = scores[0] || 0;
+
+    const average = scores.reduce((acc, curr) => acc + curr, 0) / total;
+
+    // 🔹 TOTAL DE QUESTÕES
+    const totalQuestions = simulados.reduce(
+      (acc, s) => acc + (s.total_questions || 0),
+      0,
+    );
+
+    // 🔹 TEMPO TOTAL
+    const totalTime = simulados.reduce(
+      (acc, s) => acc + (s.duration_seconds || 0),
+      0,
+    );
+
+    // 🔹 TEMPO MÉDIO POR QUESTÃO
+    const avgTimePerQuestion =
+      totalQuestions > 0 ? totalTime / totalQuestions : 0;
 
     return {
       total,
       average: average.toFixed(1),
-      best,
-      last,
+      totalQuestions,
+      avgTimePerQuestion: Math.round(avgTimePerQuestion), // segundos
     };
   }, [simulados]);
 
@@ -69,10 +83,7 @@ export default function Dashboard() {
         <div className={styles.warningBox}>
           <div>
             <strong>Acesso limitado</strong>
-            <p>
-              Assine para desbloquear todos os simulados e
-              recursos.
-            </p>
+            <p>Assine para desbloquear todos os simulados e recursos.</p>
           </div>
 
           <button
@@ -87,8 +98,11 @@ export default function Dashboard() {
       <div className={styles.cards}>
         <StatCard label="Total de Simulados" value={stats.total} />
         <StatCard label="Média Geral" value={`${stats.average}%`} />
-        <StatCard label="Melhor Nota" value={`${stats.best}%`} />
-        <StatCard label="Último Resultado" value={`${stats.last}%`} />
+        <StatCard label="Questões Respondidas" value={stats.totalQuestions} />
+        <StatCard
+          label="Tempo Médio / Questão"
+          value={`${stats.avgTimePerQuestion}s`}
+        />
       </div>
 
       <div className={styles.history}>
