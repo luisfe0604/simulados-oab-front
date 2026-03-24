@@ -79,7 +79,7 @@ export default function Conta() {
     );
   }
 
-  const isActive = ["active", "trialing"].includes(
+  const isActive = ["active", "trialing", "trial"].includes(
     subscription.subscription_status,
   );
 
