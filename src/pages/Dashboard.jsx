@@ -23,7 +23,7 @@ export default function Dashboard() {
     load();
   }, []);
 
-  const isActive = ["active", "trialing"].includes(
+  const isActive = ["active", "trialing", "trial"].includes(
     subscription?.subscription_status,
   );
 

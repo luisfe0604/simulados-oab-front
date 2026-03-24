@@ -114,7 +114,7 @@ export default function Simulado() {
     setAnswers({ ...answers, [id]: option });
   }
 
-  const isActive = ["active", "trialing"].includes(
+  const isActive = ["active", "trialing", "trial"].includes(
     subscription?.subscription_status,
   );
 

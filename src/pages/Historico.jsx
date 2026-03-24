@@ -111,7 +111,7 @@ export default function Historico() {
     navigate(`/simulado/refazer/${simuladoId}`);
   }
 
-  const isActive = ["active", "trialing"].includes(
+  const isActive = ["active", "trialing", "trial"].includes(
     subscription?.subscription_status,
   );
 
