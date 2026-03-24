@@ -249,7 +249,7 @@ export default function Simulado() {
             onChange={(e) => setLimit(e.target.value)}
           />
 
-          <button className={styles.generateBtn} onClick={generateSimulado}>
+          <button className={styles.generateBtn} onClick={generateSimulado} disabled={simuladoAtivo}>
             Iniciar
           </button>
         </div>
