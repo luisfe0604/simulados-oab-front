@@ -203,6 +203,11 @@
   transition: all 0.2s ease;
 }
 
+.generateBtn:disabled {
+  background-color: var(--disabled);
+  cursor: not-allowed;
+}
+
 .generateBtn:hover {
   background-color: var(--secondary-hover);
   transform: translateY(-1px);
