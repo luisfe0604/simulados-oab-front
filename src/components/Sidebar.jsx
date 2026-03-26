@@ -1,11 +1,20 @@
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../services/api";
 import styles from "./Sidebar.module.css";
 
 export default async function Sidebar({ open }) {
+  const [sub, setSub] = useState(null);
+
   const navigate = useNavigate();
 
-  const sub = await apiFetch("/billing/subscription");
+  useEffect(() => {
+    async function load() {
+      const data = await apiFetch("/billing/subscription");
+      setSub(data);
+    }
+    load();
+  }, []);
 
   function handleLogout() {
     localStorage.removeItem("token");
@@ -22,7 +31,7 @@ export default async function Sidebar({ open }) {
             <NavItem to="/simulado" label="Novo Simulado" />
             <NavItem to="/historico" label="Histórico" />
             <NavItem to="/conta" label="Conta" />
-            {sub?.is_admin && (<NavItem to="/questao" label="Nova Questão" />)}
+            {sub?.is_admin && <NavItem to="/questao" label="Nova Questão" />}
           </nav>
         </div>
 

@@ -1,85 +1,85 @@
-import { useEffect, useState } from "react";
-import { apiFetch } from "../services/api";
-import styles from "./NewQuestion.module.css";
+// import { useEffect, useState } from "react";
+// import { apiFetch } from "../services/api";
+// import styles from "./NewQuestion.module.css";
 
 export default function NewQuestion() {
-  const [form, setForm] = useState({
-    statement: "",
-    option_a: "",
-    option_b: "",
-    option_c: "",
-    option_d: "",
-    option_e: "",
-    correct_option: "",
-    exam_id: "",
-    subjects: []
-  });
+//   const [form, setForm] = useState({
+//     statement: "",
+//     option_a: "",
+//     option_b: "",
+//     option_c: "",
+//     option_d: "",
+//     option_e: "",
+//     correct_option: "",
+//     exam_id: "",
+//     subjects: []
+//   });
 
-  const [subjects, setSubjects] = useState([]);
-  const [exams, setExams] = useState([]);
+//   const [subjects, setSubjects] = useState([]);
+//   const [exams, setExams] = useState([]);
 
-  useEffect(() => {
-    async function loadSubjects() {
-      const subjects = await apiFetch("/subjects");
-      const exams = await apiFetch("/exams");
-      setSubjects(subjects);
-      setExams(exams);
-    }
-    loadSubjects();
-  }, []);
+//   useEffect(() => {
+//     async function loadSubjects() {
+//       const subjects = await apiFetch("/subjects");
+//       const exams = await apiFetch("/exams");
+//       setSubjects(subjects);
+//       setExams(exams);
+//     }
+//     loadSubjects();
+//   }, []);
 
-  const handleChange = (field, value) => {
-    setForm((prev) => ({
-      ...prev,
-      [field]: value
-    }));
-  };
+//   const handleChange = (field, value) => {
+//     setForm((prev) => ({
+//       ...prev,
+//       [field]: value
+//     }));
+//   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
 
-    if (!form.statement) return alert("Enunciado obrigatório");
-    if (!form.option_a || !form.option_b || !form.option_c || !form.option_d) {
-      return alert("Preencha A, B, C e D");
-    }
-    if (!form.correct_option) {
-      return alert("Selecione a alternativa correta");
-    }
-    if (!form.exam_id) {
-      return alert("Selecione uma prova");
-    }
-    if (form.subjects.length === 0) {
-      return alert("Selecione um assunto");
-    }
+//     if (!form.statement) return alert("Enunciado obrigatório");
+//     if (!form.option_a || !form.option_b || !form.option_c || !form.option_d) {
+//       return alert("Preencha A, B, C e D");
+//     }
+//     if (!form.correct_option) {
+//       return alert("Selecione a alternativa correta");
+//     }
+//     if (!form.exam_id) {
+//       return alert("Selecione uma prova");
+//     }
+//     if (form.subjects.length === 0) {
+//       return alert("Selecione um assunto");
+//     }
 
-    const payload = {
-      ...form,
-      option_e: form.option_e || null
-    };
+//     const payload = {
+//       ...form,
+//       option_e: form.option_e || null
+//     };
 
-    const res = await apiFetch("/questions", {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
+//     const res = await apiFetch("/questions", {
+//       method: "POST",
+//       body: JSON.stringify(payload)
+//     });
 
-    if (res.ok) {
-      alert("Questão criada com sucesso!");
+//     if (res.ok) {
+//       alert("Questão criada com sucesso!");
 
-      setForm((prev) => ({
-        ...prev,
-        statement: "",
-        option_a: "",
-        option_b: "",
-        option_c: "",
-        option_d: "",
-        option_e: "",
-        correct_option: "",
-        explanation: ""
-      }));
-    } else {
-      alert("Erro ao criar questão");
-    }
-  };
+//       setForm((prev) => ({
+//         ...prev,
+//         statement: "",
+//         option_a: "",
+//         option_b: "",
+//         option_c: "",
+//         option_d: "",
+//         option_e: "",
+//         correct_option: "",
+//         explanation: ""
+//       }));
+//     } else {
+//       alert("Erro ao criar questão");
+//     }
+//   };
 
 //   return (
 //     <div className={styles.container}>
