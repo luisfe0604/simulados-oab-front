@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Simulado from "./pages/Simulado";
@@ -62,9 +62,11 @@ export default function App() {
         <Route
           path="/questao"
           element={
-            <AdminRoute>
-              <NewQuestion />
-            </AdminRoute>
+            <PrivateRoute>
+              {/* <AdminRoute> */}
+                <NewQuestion />
+              {/* </AdminRoute> */}
+            </PrivateRoute>
           }
         />
       </Route>
