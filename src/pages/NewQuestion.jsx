@@ -13,7 +13,7 @@ export default function CreateQuestion() {
     correct_option: "",
     exam_id: "",
     subjects: [],
-    explanation: "",
+    explanation: ""
   });
 
   const [subjects, setSubjects] = useState([]);
@@ -25,15 +25,11 @@ export default function CreateQuestion() {
   }, []);
 
   const fetchSubjects = async () => {
-    console.log("subjects:", await apiFetch("/subjects"));
-
     const data = await apiFetch("/subjects");
     setSubjects(data);
   };
 
   const fetchExams = async () => {
-    console.log("exams:", await apiFetch("/exams"));
-
     const data = await apiFetch("/exams");
     setExams(data);
   };
@@ -41,7 +37,7 @@ export default function CreateQuestion() {
   const handleChange = (field, value) => {
     setForm((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: value
     }));
   };
 
@@ -64,15 +60,15 @@ export default function CreateQuestion() {
 
     const payload = {
       ...form,
-      option_e: form.option_e || null,
+      option_e: form.option_e || null
     };
 
     const res = await apiFetch("/questions", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload)
     });
 
     if (res.ok) {
@@ -87,7 +83,7 @@ export default function CreateQuestion() {
         option_d: "",
         option_e: "",
         correct_option: "",
-        explanation: "",
+        explanation: ""
       }));
     } else {
       alert("Erro ao criar questão");
@@ -104,7 +100,9 @@ export default function CreateQuestion() {
           <label className={styles.label}>Assunto</label>
           <select
             className={styles.select}
-            onChange={(e) => handleChange("subjects", [Number(e.target.value)])}
+            onChange={(e) =>
+              handleChange("subjects", [Number(e.target.value)])
+            }
           >
             <option value="">Selecione</option>
             {subjects.map((s) => (
@@ -120,7 +118,9 @@ export default function CreateQuestion() {
           <label className={styles.label}>Prova</label>
           <select
             className={styles.select}
-            onChange={(e) => handleChange("exam_id", Number(e.target.value))}
+            onChange={(e) =>
+              handleChange("exam_id", Number(e.target.value))
+            }
           >
             <option value="">Selecione</option>
             {exams.map((e) => (
@@ -153,7 +153,9 @@ export default function CreateQuestion() {
                 name="correct"
                 value={letter.toUpperCase()}
                 className={styles.radio}
-                onChange={(e) => handleChange("correct_option", e.target.value)}
+                onChange={(e) =>
+                  handleChange("correct_option", e.target.value)
+                }
               />
 
               <input

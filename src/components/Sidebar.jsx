@@ -7,6 +7,8 @@ export default async function Sidebar({ open }) {
 
   const sub = await apiFetch("/billing/subscription");
 
+    console.log(sub)
+
   function handleLogout() {
     localStorage.removeItem("token");
     navigate("/login");
