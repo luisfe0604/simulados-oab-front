@@ -63,9 +63,9 @@ export default function App() {
           path="/questao"
           element={
             <PrivateRoute>
-              {/* <AdminRoute> */}
+              <AdminRoute>
                 <NewQuestion />
-              {/* </AdminRoute> */}
+              </AdminRoute>
             </PrivateRoute>
           }
         />

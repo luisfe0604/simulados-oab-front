@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { apiFetch } from "../services/api";
 import styles from "./NewQuestion.module.css";
 
-export default function CreateQuestion() {
+export default function NewQuestion() {
   const [form, setForm] = useState({
     statement: "",
     option_a: "",
