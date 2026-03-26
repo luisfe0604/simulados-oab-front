@@ -20,19 +20,14 @@ export default function CreateQuestion() {
   const [exams, setExams] = useState([]);
 
   useEffect(() => {
-    fetchSubjects();
-    fetchExams();
+    async function loadSubjects() {
+      const subjects = await apiFetch("/subjects");
+      const exams = await apiFetch("/exams");
+      setSubjects(subjects);
+      setExams(exams);
+    }
+    loadSubjects();
   }, []);
-
-  const fetchSubjects = async () => {
-    const data = await apiFetch("/subjects");
-    setSubjects(data);
-  };
-
-  const fetchExams = async () => {
-    const data = await apiFetch("/exams");
-    setExams(data);
-  };
 
   const handleChange = (field, value) => {
     setForm((prev) => ({
