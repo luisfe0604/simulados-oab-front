@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../services/api";
 import styles from "./Sidebar.module.css";
 
-export default async function Sidebar({ open }) {
+export default function Sidebar({ open }) {
   const [sub, setSub] = useState(null);
 
   const navigate = useNavigate();
