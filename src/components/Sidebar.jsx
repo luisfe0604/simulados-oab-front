@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
-export default function Sidebar({ open }) {
+export default async function Sidebar({ open }) {
   const navigate = useNavigate();
+
+  const sub = await apiFetch("/billing/subscription");
 
   function handleLogout() {
     localStorage.removeItem("token");
@@ -20,6 +22,7 @@ export default function Sidebar({ open }) {
             <NavItem to="/simulado" label="Novo Simulado" />
             <NavItem to="/historico" label="Histórico" />
             <NavItem to="/conta" label="Conta" />
+            {sub?.is_admin && (<NavItem to="/questao" label="Nova Questão" />)}
           </nav>
         </div>
 

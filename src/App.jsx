@@ -8,6 +8,8 @@ import AuthSuccess from "./pages/AuthSuccess";
 import PrivateRoute from "./components/ProtectedRoutes";
 import Register from "./pages/Register";
 import Conta from "./pages/Conta";
+import NewQuestion from "./pages/NewQuestion";
+import AdminRoute from "./components/AdminRoute";
 
 export default function App() {
   return (
@@ -55,6 +57,14 @@ export default function App() {
             <PrivateRoute>
               <Conta />
             </PrivateRoute>
+          }
+        />
+        <Route
+          path="/questao"
+          element={
+            <AdminRoute>
+              <NewQuestion />
+            </AdminRoute>
           }
         />
       </Route>
