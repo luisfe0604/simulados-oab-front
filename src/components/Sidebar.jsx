@@ -22,7 +22,7 @@ export default async function Sidebar({ open }) {
             <NavItem to="/simulado" label="Novo Simulado" />
             <NavItem to="/historico" label="Histórico" />
             <NavItem to="/conta" label="Conta" />
-            {/* {sub?.is_admin && (<NavItem to="/questao" label="Nova Questão" />)} */}
+            {sub?.is_admin && (<NavItem to="/questao" label="Nova Questão" />)}
           </nav>
         </div>
 

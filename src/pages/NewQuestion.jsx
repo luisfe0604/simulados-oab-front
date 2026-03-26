@@ -60,9 +60,6 @@ export default function NewQuestion() {
 
     const res = await apiFetch("/questions", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify(payload)
     });
 
