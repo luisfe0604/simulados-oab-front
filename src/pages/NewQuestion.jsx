@@ -25,14 +25,12 @@ export default function CreateQuestion() {
   }, []);
 
   const fetchSubjects = async () => {
-    const res = await apiFetch("/subjects");
-    const data = await res.json();
+    const data = await apiFetch("/subjects");
     setSubjects(data);
   };
 
   const fetchExams = async () => {
-    const res = await apiFetch("/exams");
-    const data = await res.json();
+    const data = await apiFetch("/exams");
     setExams(data);
   };
 
