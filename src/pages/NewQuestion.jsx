@@ -12,8 +12,7 @@ export default function NewQuestion() {
     option_e: "",
     correct_option: "",
     exam_id: "",
-    subjects: [],
-    explanation: ""
+    subjects: []
   });
 
   const [subjects, setSubjects] = useState([]);
@@ -115,11 +114,11 @@ export default function NewQuestion() {
             }
           >
             <option value="">Selecione</option>
-            {exams.map((e) => (
+            {/* {exams.map((e) => (
               <option key={e.id} value={e.id}>
                 {e.name}
               </option>
-            ))}
+            ))} */}
           </select>
         </div>
 
@@ -163,17 +162,6 @@ export default function NewQuestion() {
               />
             </div>
           ))}
-        </div>
-
-        {/* 📘 Explicação */}
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Explicação (opcional)</label>
-          <textarea
-            className={styles.textarea}
-            value={form.explanation}
-            onChange={(e) => handleChange("explanation", e.target.value)}
-            rows={3}
-          />
         </div>
 
         {/* 🚀 Botão */}
