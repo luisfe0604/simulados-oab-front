@@ -72,6 +72,7 @@ export default function NewQuestion() {
     setLoading(true);
 
     try {
+        console.log(form)
       await apiFetch("/questions", {
         method: "POST",
         body: JSON.stringify({
@@ -188,7 +189,7 @@ export default function NewQuestion() {
                   onChange={(e) =>
                     handleChange(`option_${letter}`, e.target.value)
                   }
-                  onClick={(e) => e.stopPropagation()} // evita conflito com clique
+                  onClick={(e) => e.stopPropagation()}
                 />
               </div>
             );
