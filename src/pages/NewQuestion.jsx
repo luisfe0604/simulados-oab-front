@@ -81,94 +81,95 @@ export default function NewQuestion() {
     }
   };
 
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Criar Questão</h2>
+//   return (
+//     <div className={styles.container}>
+//       <h2 className={styles.title}>Criar Questão</h2>
 
-      <form onSubmit={handleSubmit} className={styles.card}>
-        {/* 📚 Assunto */}
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Assunto</label>
-          <select
-            className={styles.select}
-            onChange={(e) =>
-              handleChange("subjects", [Number(e.target.value)])
-            }
-          >
-            <option value="">Selecione</option>
-            {subjects.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-        </div>
+//       <form onSubmit={handleSubmit} className={styles.card}>
+//         {/* 📚 Assunto */}
+//         <div className={styles.formGroup}>
+//           <label className={styles.label}>Assunto</label>
+//           <select
+//             className={styles.select}
+//             onChange={(e) =>
+//               handleChange("subjects", [Number(e.target.value)])
+//             }
+//           >
+//             <option value="">Selecione</option>
+//             {subjects.map((s) => (
+//               <option key={s.id} value={s.id}>
+//                 {s.name}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
 
-        {/* 📝 Prova */}
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Prova</label>
-          <select
-            className={styles.select}
-            onChange={(e) =>
-              handleChange("exam_id", Number(e.target.value))
-            }
-          >
-            <option value="">Selecione</option>
-            {/* {exams.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.name}
-              </option>
-            ))} */}
-          </select>
-        </div>
+//         {/* 📝 Prova */}
+//         <div className={styles.formGroup}>
+//           <label className={styles.label}>Prova</label>
+//           <select
+//             className={styles.select}
+//             onChange={(e) =>
+//               handleChange("exam_id", Number(e.target.value))
+//             }
+//           >
+//             <option value="">Selecione</option>
+//             {exams.map((e) => (
+//               <option key={e.id} value={e.id}>
+//                 {e.name}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
 
-        {/* ✍️ Enunciado */}
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Enunciado</label>
-          <textarea
-            className={styles.textarea}
-            value={form.statement}
-            onChange={(e) => handleChange("statement", e.target.value)}
-            rows={4}
-          />
-        </div>
+//         {/* ✍️ Enunciado */}
+//         <div className={styles.formGroup}>
+//           <label className={styles.label}>Enunciado</label>
+//           <textarea
+//             className={styles.textarea}
+//             value={form.statement}
+//             onChange={(e) => handleChange("statement", e.target.value)}
+//             rows={4}
+//           />
+//         </div>
 
-        {/* 🔘 Alternativas */}
-        <h4 className={styles.sectionTitle}>Alternativas</h4>
+//         {/* 🔘 Alternativas */}
+//         <h4 className={styles.sectionTitle}>Alternativas</h4>
 
-        <div className={styles.options}>
-          {["a", "b", "c", "d", "e"].map((letter) => (
-            <div key={letter} className={styles.optionRow}>
-              <input
-                type="radio"
-                name="correct"
-                value={letter.toUpperCase()}
-                className={styles.radio}
-                onChange={(e) =>
-                  handleChange("correct_option", e.target.value)
-                }
-              />
+//         <div className={styles.options}>
+//           {["a", "b", "c", "d", "e"].map((letter) => (
+//             <div key={letter} className={styles.optionRow}>
+//               <input
+//                 type="radio"
+//                 name="correct"
+//                 value={letter.toUpperCase()}
+//                 className={styles.radio}
+//                 onChange={(e) =>
+//                   handleChange("correct_option", e.target.value)
+//                 }
+//               />
 
-              <input
-                type="text"
-                className={`${styles.input} ${styles.optionInput}`}
-                placeholder={`Alternativa ${letter.toUpperCase()} ${
-                  letter === "e" ? "(opcional)" : ""
-                }`}
-                value={form[`option_${letter}`]}
-                onChange={(e) =>
-                  handleChange(`option_${letter}`, e.target.value)
-                }
-              />
-            </div>
-          ))}
-        </div>
+//               <input
+//                 type="text"
+//                 className={`${styles.input} ${styles.optionInput}`}
+//                 placeholder={`Alternativa ${letter.toUpperCase()} ${
+//                   letter === "e" ? "(opcional)" : ""
+//                 }`}
+//                 value={form[`option_${letter}`]}
+//                 onChange={(e) =>
+//                   handleChange(`option_${letter}`, e.target.value)
+//                 }
+//               />
+//             </div>
+//           ))}
+//         </div>
 
-        {/* 🚀 Botão */}
-        <button type="submit" className={styles.submitBtn}>
-          Criar Questão
-        </button>
-      </form>
-    </div>
-  );
+//         {/* 🚀 Botão */}
+//         <button type="submit" className={styles.submitBtn}>
+//           Criar Questão
+//         </button>
+//       </form>
+//     </div>
+//   );
+return <h1>Teste</h1>;
 }
