@@ -9,6 +9,7 @@ import PrivateRoute from "./components/ProtectedRoutes";
 import Register from "./pages/Register";
 import Conta from "./pages/Conta";
 import NewQuestion from "./pages/NewQuestion";
+import AdminDashboard from "./pages/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
 
 export default function App() {
@@ -65,6 +66,16 @@ export default function App() {
             <PrivateRoute>
               <AdminRoute>
                 <NewQuestion />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashAdmin"
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <AdminDashboard />
               </AdminRoute>
             </PrivateRoute>
           }
