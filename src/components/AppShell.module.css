@@ -27,6 +27,7 @@
   flex-shrink: 0;
 }
 .brandName {
+  display: block;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.35rem;
@@ -34,12 +35,14 @@
   line-height: 1;
 }
 .brandSub {
+  display: block;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.24em;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
+  white-space: nowrap;
 }
 
 .nav {
