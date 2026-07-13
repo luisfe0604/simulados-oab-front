@@ -169,7 +169,10 @@ export function SimuladoRunner({ subjects, initialQuestions }: SimuladoRunnerPro
           </span>
           <div className={styles.progressWrap}>
             <div className={styles.progressMeta}>
-              <span>{answeredCount} respondidas</span>
+              <span>
+                {answeredCount}{" "}
+                {answeredCount === 1 ? "respondida" : "respondidas"}
+              </span>
               <span>{questions.length} questões</span>
             </div>
             <div className={styles.progressTrack}>
