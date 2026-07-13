@@ -44,14 +44,8 @@
   gap: 0.7rem;
 }
 .heroBrandRing {
+  display: inline-flex;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-}
-.heroBrandRing circle {
-  stroke: #f4e9df !important;
-}
-.heroBrandRing path {
-  fill: #f4e9df !important;
-  stroke: #f4e9df !important;
 }
 .heroWordmark {
   font-family: var(--font-display);

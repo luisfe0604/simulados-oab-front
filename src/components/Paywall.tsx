@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { RubiRing } from "./icons";
+import { JurisLogo } from "./icons";
 
 // Bloqueio para conteúdo pago — direciona para a assinatura.
 export function Paywall({
@@ -23,7 +23,9 @@ export function Paywall({
         borderRadius: "var(--radius-lg)",
       }}
     >
-      <RubiRing size={48} />
+      <span style={{ color: "var(--rubi)", display: "inline-flex" }}>
+        <JurisLogo size={48} />
+      </span>
       <h2 className="display" style={{ fontSize: "var(--step-2)" }}>
         {title}
       </h2>

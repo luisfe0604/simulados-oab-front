@@ -29,7 +29,7 @@
 .brandName {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   letter-spacing: -0.02em;
   line-height: 1;
 }
@@ -147,6 +147,20 @@
 .logout:hover {
   border-color: var(--erro);
   color: var(--erro);
+}
+.help {
+  margin-top: 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--ink-faint);
+}
+.help a {
+  color: var(--rubi);
+  font-weight: 600;
+  word-break: break-all;
+}
+.help a:hover {
+  text-decoration: underline;
 }
 
 /* -------- Main -------- */

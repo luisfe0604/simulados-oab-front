@@ -95,17 +95,28 @@ export const IconArrow = ({ size = 18 }: IconProps) => (
   </svg>
 );
 
-// Marca: anel de rubi (signet). Gema no topo do anel.
-export const RubiRing = ({ size = 30 }: IconProps) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-    <circle cx="16" cy="19" r="9" stroke="var(--rubi)" strokeWidth="2.4" />
-    <path
-      d="M16 3.5 20 8l-4 4-4-4z"
-      fill="var(--rubi)"
-      stroke="var(--rubi-deep)"
-      strokeWidth="0.6"
-      strokeLinejoin="round"
-    />
-    <path d="M12 8h8l-4 4z" fill="var(--rubi-bright)" opacity="0.85" />
+// Marca: balança da justiça (JurisAprova). Usa currentColor para se adaptar ao
+// fundo (rubi na sidebar clara, creme sobre o hero rubi).
+export const JurisLogo = ({ size = 30 }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 32 32"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.7}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    {/* haste, base e travessão */}
+    <circle cx="16" cy="5.4" r="1.3" fill="currentColor" stroke="none" />
+    <path d="M16 6.7V25.5" />
+    <path d="M10.5 25.5h11" />
+    <path d="M6 9.5h20" />
+    {/* cordas dos pratos */}
+    <path d="M6 9.5 3 15M6 9.5 9 15M26 9.5 23 15M26 9.5 29 15" />
+    {/* pratos */}
+    <path d="M2.6 15Q6 19 9.4 15" />
+    <path d="M22.6 15Q26 19 29.4 15" />
   </svg>
 );

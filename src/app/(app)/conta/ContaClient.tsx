@@ -141,7 +141,7 @@ function ContaInner() {
               ? "Período de teste"
               : session.hasPaid
                 ? "Acesso completo"
-                : "Assine a Rubi"}
+                : "Assine a JurisAprova"}
           </div>
           <p className={styles.subLead}>
             {isTrial

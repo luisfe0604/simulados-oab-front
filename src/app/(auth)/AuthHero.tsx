@@ -1,4 +1,4 @@
-import { RubiRing } from "@/components/icons";
+import { JurisLogo } from "@/components/icons";
 import styles from "./auth.module.css";
 
 // Marca d'água evocando um código de lei (artigos numerados) — vernáculo real
@@ -16,10 +16,10 @@ export function AuthHero() {
       </div>
 
       <div className={styles.heroTop}>
-        <span className={styles.heroBrandRing}>
-          <RubiRing size={32} />
+        <span className={styles.heroBrandRing} style={{ color: "#f4e9df" }}>
+          <JurisLogo size={30} />
         </span>
-        <span className={styles.heroWordmark}>Rubi</span>
+        <span className={styles.heroWordmark}>JurisAprova</span>
       </div>
 
       <div className={styles.heroCenter}>
@@ -36,16 +36,16 @@ export function AuthHero() {
 
       <div className={styles.heroStats}>
         <div className={styles.heroStat}>
-          <span className={styles.heroStatNum}>1.962</span>
-          <span className={styles.heroStatLabel}>Questões</span>
+          <span className={styles.heroStatNum}>80</span>
+          <span className={styles.heroStatLabel}>Questões por simulado</span>
         </div>
         <div className={styles.heroStat}>
           <span className={styles.heroStatNum}>20</span>
           <span className={styles.heroStatLabel}>Matérias</span>
         </div>
         <div className={styles.heroStat}>
-          <span className={styles.heroStatNum}>80</span>
-          <span className={styles.heroStatLabel}>No simulado OAB</span>
+          <span className={styles.heroStatNum}>50%</span>
+          <span className={styles.heroStatLabel}>Linha de corte</span>
         </div>
       </div>
     </section>

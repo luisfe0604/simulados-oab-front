@@ -28,9 +28,10 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rubi — Simulados OAB",
+  title: "JurisAprova — Simulados OAB",
   description:
     "Plataforma de simulados para a 1ª fase do Exame de Ordem. Pratique, corrija e acompanhe sua evolução até a aprovação.",
+  icons: { icon: "/logo.png" },
 };
 
 export default function RootLayout({

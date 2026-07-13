@@ -15,7 +15,7 @@ import {
   IconAdmin,
   IconMenu,
   IconLogout,
-  RubiRing,
+  JurisLogo,
 } from "./icons";
 
 interface NavLink {
@@ -75,11 +75,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className={styles.shell}>
       <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}>
         <div className={styles.brand}>
-          <span className={styles.brandMark}>
-            <RubiRing size={34} />
+          <span className={styles.brandMark} style={{ color: "var(--rubi)" }}>
+            <JurisLogo size={34} />
           </span>
           <span>
-            <span className={styles.brandName}>Rubi</span>
+            <span className={styles.brandName}>JurisAprova</span>
             <span className={styles.brandSub}>Simulados OAB</span>
           </span>
         </div>
@@ -112,6 +112,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <IconLogout />
             Sair da conta
           </button>
+          <p className={styles.help}>
+            Dúvidas:{" "}
+            <a href="mailto:contato.jurisaprova@gmail.com?subject=Ajuda&body=Olá, preciso de suporte">
+              contato.jurisaprova@gmail.com
+            </a>
+          </p>
         </div>
       </aside>
 
@@ -128,9 +134,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           >
             <IconMenu />
           </button>
-          <RubiRing size={26} />
-          <span className={styles.brandName} style={{ fontSize: "1.25rem" }}>
-            Rubi
+          <span style={{ color: "var(--rubi)", display: "inline-flex" }}>
+            <JurisLogo size={26} />
+          </span>
+          <span className={styles.brandName} style={{ fontSize: "1.2rem" }}>
+            JurisAprova
           </span>
         </header>
         <main className={styles.content}>{children}</main>

@@ -1,4 +1,4 @@
-// Assinatura visual da Rubi: o "anel de rubi" de progresso.
+// Assinatura visual do JurisAprova: o "anel de rubi" de progresso.
 // A linha de corte marca 50% — a nota real de aprovação na 1ª fase da OAB
 // (40 de 80 questões). Abaixo disso o anel fica incompleto; a partir de 50%
 // ele fecha e ganha o brilho de ouro-velho ("Aprovado").
