@@ -158,9 +158,12 @@
   color: var(--ink-faint);
 }
 .help a {
+  display: block;
+  margin-top: 0.15rem;
   color: var(--rubi);
   font-weight: 600;
-  word-break: break-all;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 .help a:hover {
   text-decoration: underline;
