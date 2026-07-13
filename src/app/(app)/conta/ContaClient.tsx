@@ -213,6 +213,17 @@ function ContaInner() {
                 {loading === "cancel" ? "Cancelando…" : "Cancelar renovação"}
               </button>
             )}
+            {!session.hasPaid && (
+              <button
+                className="btn btn-ghost"
+                onClick={() =>
+                  run("sync", () => api.post("/billing/sync-subscription"))
+                }
+                disabled={loading === "sync"}
+              >
+                {loading === "sync" ? "Verificando…" : "Já paguei — atualizar acesso"}
+              </button>
+            )}
           </div>
 
           {session.trial_end && session.hasPaid && (

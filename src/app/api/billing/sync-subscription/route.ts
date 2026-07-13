@@ -1,50 +1,79 @@
+import type Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth";
 import { stripe, STATUS_PRIORITY } from "@/lib/stripe";
 import { handle, json } from "@/lib/http";
 
 // Reconcilia o status da assinatura do usuário autenticado a partir do Stripe.
-// IMPORTANTE: diferente do backend antigo (que aceitava um customer_id arbitrário
-// SEM autenticação), aqui só sincronizamos a assinatura do PRÓPRIO usuário logado,
-// derivada do gateway_customer_id armazenado — fecha a brecha de segurança.
+// Segurança: só sincroniza a assinatura do PRÓPRIO usuário logado (por
+// gateway_customer_id ou pelo e-mail dele) — nunca por um id arbitrário.
+//
+// Resiliência: se o gateway_customer_id ainda não foi gravado (o webhook de
+// checkout.session.completed não chegou), buscamos o customer no Stripe pelo
+// e-mail. Assim a ativação pós-checkout funciona mesmo sem o webhook.
 export const POST = handle(async () => {
   const user = await requireUser();
-  if (!user.gateway_customer_id) {
+
+  // Descobre em quais customers procurar. Cada checkout com customer_email cria
+  // um customer NOVO no Stripe, então um usuário pode ter vários — buscamos por
+  // e-mail (todos) e incluímos também o gateway_customer_id já gravado.
+  const customerIds = new Set<string>();
+  if (user.gateway_customer_id) customerIds.add(user.gateway_customer_id);
+  const customers = await stripe.customers.list({
+    email: user.email,
+    limit: 20,
+  });
+  customers.data.forEach((c) => customerIds.add(c.id));
+
+  if (customerIds.size === 0) {
     return json({ synced: false, reason: "sem_customer" });
   }
 
-  const subscriptions = await stripe.subscriptions.list({
-    customer: user.gateway_customer_id,
-    status: "all",
-    limit: 100,
-  });
+  // Reúne as assinaturas de todos os customers e escolhe a mais relevante.
+  let best: { sub: Stripe.Subscription; customerId: string } | null = null;
+  for (const customerId of customerIds) {
+    const subs = await stripe.subscriptions.list({
+      customer: customerId,
+      status: "all",
+      limit: 100,
+    });
+    for (const sub of subs.data) {
+      const better =
+        !best ||
+        (STATUS_PRIORITY[sub.status] ?? 0) >
+          (STATUS_PRIORITY[best.sub.status] ?? 0);
+      if (better) best = { sub, customerId };
+    }
+  }
 
-  if (subscriptions.data.length === 0) {
+  if (!best) {
+    // Cliente existe no Stripe mas sem nenhuma assinatura.
     await prisma.users.update({
       where: { id: user.id },
-      data: { subscription_status: "inactive", plan: "free" },
+      data: {
+        subscription_status: "inactive",
+        plan: "free",
+        gateway_customer_id: [...customerIds][0],
+      },
     });
     return json({ synced: true, status: "inactive" });
   }
 
-  // Escolhe a assinatura mais relevante por prioridade de status.
-  const best = subscriptions.data.reduce((acc, sub) =>
-    (STATUS_PRIORITY[sub.status] ?? 0) > (STATUS_PRIORITY[acc.status] ?? 0)
-      ? sub
-      : acc,
-  );
+  const { sub, customerId } = best;
+  const isActive = sub.status === "active" || sub.status === "trialing";
 
   await prisma.users.update({
     where: { id: user.id },
     data: {
-      subscription_status: best.status,
-      plan: best.status === "active" || best.status === "trialing" ? "premium" : "free",
-      gateway_subscription_id: best.id,
-      cancel_at_period_end: best.cancel_at_period_end,
-      subscription_cancelled_at: best.cancel_at_period_end ? new Date() : null,
-      trial_end: best.trial_end ? new Date(best.trial_end * 1000) : null,
+      subscription_status: sub.status,
+      plan: isActive ? "premium" : "free",
+      gateway_customer_id: customerId,
+      gateway_subscription_id: sub.id,
+      cancel_at_period_end: sub.cancel_at_period_end,
+      subscription_cancelled_at: sub.cancel_at_period_end ? new Date() : null,
+      trial_end: sub.trial_end ? new Date(sub.trial_end * 1000) : null,
     },
   });
 
-  return json({ synced: true, status: best.status });
+  return json({ synced: true, status: sub.status });
 });
