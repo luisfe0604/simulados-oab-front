@@ -5,6 +5,8 @@ import { setSessionCookie, toSafeUser } from "@/lib/auth";
 import { badRequest, handle, json } from "@/lib/http";
 import { parseBody } from "@/lib/validation";
 
+const TRIAL_DAYS = 7;
+
 const schema = z.object({
   name: z.string().trim().min(1, "Nome é obrigatório").max(100),
   email: z.string().trim().toLowerCase().email("E-mail inválido").max(150),
@@ -19,15 +21,17 @@ export const POST = handle(async (request: Request) => {
 
   const password_hash = await hashPassword(password);
 
-  // Novas contas começam sem assinatura ativa (paridade com o backend atual):
-  // o acesso ao conteúdo pago exige checkout/trial via Stripe.
+  // Novas contas ganham 7 dias de trial local (acesso liberado até trial_end).
+  // Diferente do "trialing" do Stripe, este trial é controlado pela aplicação.
+  const trialEnd = new Date(Date.now() + TRIAL_DAYS * 24 * 60 * 60 * 1000);
   const user = await prisma.users.create({
     data: {
       name,
       email,
       password_hash,
-      plan: "free",
-      subscription_status: "inactive",
+      plan: "trial",
+      subscription_status: "trial",
+      trial_end: trialEnd,
     },
   });
 

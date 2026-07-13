@@ -59,15 +59,18 @@ export async function GET(request: Request) {
   const email = info.email?.toLowerCase();
   if (!email) return loginRedirect("oauth_email");
 
-  // findOrCreate por e-mail (contas Google não têm senha).
+  // findOrCreate por e-mail (contas Google não têm senha). Novos cadastros
+  // ganham 7 dias de trial local, igual ao cadastro por e-mail.
+  const trialEnd = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const user =
     (await prisma.users.findUnique({ where: { email } })) ??
     (await prisma.users.create({
       data: {
         email,
         name: info.name ?? null,
-        plan: "free",
-        subscription_status: "inactive",
+        plan: "trial",
+        subscription_status: "trial",
+        trial_end: trialEnd,
       },
     }));
 

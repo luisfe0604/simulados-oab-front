@@ -8,8 +8,8 @@ import { SESSION_COOKIE } from "./constants";
 export { SESSION_COOKIE };
 const SEVEN_DAYS = 60 * 60 * 24 * 7;
 
-// Status de assinatura que liberam acesso ao conteúdo pago.
-const PAID_STATUSES = new Set(["active", "trialing", "trial"]);
+// Status gerenciados pelo Stripe (via webhook) que liberam acesso.
+const STRIPE_ACTIVE_STATUSES = new Set(["active", "trialing"]);
 
 /** Usuário sem o campo sensível password_hash — formato seguro para respostas. */
 export type SafeUser = Omit<User, "password_hash">;
@@ -64,7 +64,18 @@ export async function requireAdmin(): Promise<User> {
 }
 
 export function hasPaidAccess(user: User): boolean {
-  return Boolean(user.is_admin) || PAID_STATUSES.has(user.subscription_status ?? "");
+  if (user.is_admin) return true;
+
+  const status = user.subscription_status ?? "";
+  // Assinatura Stripe ativa (ou em trial gerenciado pelo Stripe).
+  if (STRIPE_ACTIVE_STATUSES.has(status)) return true;
+
+  // Trial local (concedido no cadastro): vale até trial_end.
+  if (status === "trial") {
+    return !user.trial_end || user.trial_end.getTime() > Date.now();
+  }
+
+  return false;
 }
 
 /** Exige assinatura ativa (ou admin); lança 401/403. */

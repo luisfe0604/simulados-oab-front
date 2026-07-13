@@ -54,8 +54,11 @@ function ContaInner() {
 
   const status = session.subscription_status ?? "inactive";
   const meta = STATUS_LABEL[status] ?? STATUS_LABEL.inactive;
-  const showSubscribe = !session.hasPaid;
-  const showCancel = session.hasPaid && !session.cancel_at_period_end && !session.is_admin;
+  const isTrial = status === "trial";
+  // Assinatura de fato paga/gerenciada pelo Stripe (o trial local não é).
+  const hasStripeSub = status === "active" || status === "trialing";
+  const showSubscribe = !session.is_admin && !hasStripeSub;
+  const showCancel = hasStripeSub && !session.cancel_at_period_end && !session.is_admin;
   const showReactivate = session.cancel_at_period_end;
 
   async function run(label: string, fn: () => Promise<unknown>) {
@@ -110,7 +113,11 @@ function ContaInner() {
           <div className={styles.infoRow}>
             <span className={styles.infoLabel}>Plano</span>
             <span className={styles.infoValue}>
-              {session.plan === "premium" ? "Premium" : "Gratuito"}
+              {session.plan === "premium"
+                ? "Premium"
+                : session.plan === "trial"
+                  ? "Teste grátis"
+                  : "Gratuito"}
             </span>
           </div>
           {session.is_admin && (
@@ -130,15 +137,21 @@ function ContaInner() {
           </div>
 
           <div className={styles.subPlan}>
-            {session.hasPaid ? "Acesso completo" : "Assine a Rubi"}
+            {isTrial
+              ? "Período de teste"
+              : session.hasPaid
+                ? "Acesso completo"
+                : "Assine a Rubi"}
           </div>
           <p className={styles.subLead}>
-            {session.hasPaid
-              ? "Você tem acesso a todos os simulados e recursos. Bons estudos rumo à aprovação."
-              : "Libere todos os simulados no formato oficial da OAB, com correção e histórico. 7 dias de teste grátis."}
+            {isTrial
+              ? "Você está no teste grátis, com acesso completo à plataforma. Assine para manter o acesso quando o período acabar."
+              : hasStripeSub
+                ? "Você tem acesso a todos os simulados e recursos. Bons estudos rumo à aprovação."
+                : "Libere todos os simulados no formato oficial da OAB, com correção e histórico. 7 dias de teste grátis."}
           </p>
 
-          {!session.hasPaid && (
+          {showSubscribe && (
             <div style={{ marginBottom: "1.4rem" }}>
               {PERKS.map((p) => (
                 <div key={p} className={styles.perk}>
