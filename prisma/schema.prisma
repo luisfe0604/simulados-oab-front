@@ -1,0 +1,11 @@
+// Prisma schema — os modelos serão preenchidos por `prisma db pull` (introspecção
+// do banco Postgres existente). Este arquivo começa apenas com datasource + generator.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
