@@ -1,0 +1,114 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+}
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.infoRow:last-child {
+  border-bottom: none;
+}
+.infoLabel {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.infoValue {
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+
+.subCard {
+  background:
+    radial-gradient(130% 120% at 100% 0%, var(--rubi-wash), var(--surface) 62%);
+  border: 1px solid rgba(123, 30, 43, 0.22);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+}
+.subStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+.subPlan {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.subLead {
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
+  max-width: 46ch;
+}
+.subActions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.subFine {
+  margin-top: 1.2rem;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+.banner {
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.3rem;
+  margin-bottom: 1.6rem;
+  font-weight: 500;
+}
+.bannerOk {
+  background: var(--verde-wash);
+  color: var(--verde);
+  border: 1px solid rgba(46, 94, 78, 0.25);
+}
+.bannerInfo {
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+
+.perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.perk svg {
+  color: var(--verde);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@media (max-width: 780px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
