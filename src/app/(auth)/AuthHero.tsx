@@ -25,7 +25,7 @@ export function AuthHero() {
       <div className={styles.heroCenter}>
         <p className={styles.heroEyebrow}>1ª fase · Exame de Ordem</p>
         <h1 className={styles.heroTitle}>
-          A distância entre você e o <em>anel de rubi</em> são 40 questões.
+          A distância entre você e a <em>aprovação</em> são 40 questões.
         </h1>
         <p className={styles.heroText}>
           Monte o simulado no formato oficial da OAB, corrija na hora e veja sua

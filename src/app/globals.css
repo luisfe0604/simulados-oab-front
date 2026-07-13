@@ -1,6 +1,6 @@
 /* ==========================================================================
    Rubi — Sistema de design "Rubi & Toga"
-   Universo do Direito brasileiro: pergaminho, tinta, rubi (anel da Ordem),
+   Universo do Direito brasileiro: pergaminho, tinta, rubi (Vade Mecum),
    ouro-velho (toga) e verde judicial. Rubi é cor arquitetural, não enfeite.
    ========================================================================== */
 
@@ -15,7 +15,7 @@
   --line: #d9d2c5;
   --line-strong: #c7bda e;
 
-  /* Marca — rubi (anel de rubi / Vade Mecum) */
+  /* Marca — rubi (Vade Mecum) */
   --rubi: #7b1e2b;
   --rubi-deep: #5a141e;
   --rubi-bright: #9d2c3a;
