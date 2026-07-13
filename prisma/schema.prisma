@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model exams {
+  id        Int         @id @default(autoincrement())
+  name      String?     @db.VarChar(150)
+  year      Int?
+  board     String?     @db.VarChar(100)
+  questions questions[]
+}
+
+model exams_enem {
+  id             Int              @id @default(autoincrement())
+  year           Int
+  board          String           @db.VarChar(100)
+  name           String?          @db.VarChar(150)
+  questions_enem questions_enem[]
+
+  @@unique([year, board], map: "unique_exam")
+}
+
+model question_subjects {
+  question_id Int
+  subject_id  Int
+  questions   questions @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  subjects    subjects  @relation(fields: [subject_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([question_id, subject_id])
+}
+
+model question_subjects_enem {
+  question_id    Int
+  subject_id     Int
+  questions_enem questions_enem @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  subjects_enem  subjects_enem  @relation(fields: [subject_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([question_id, subject_id])
+  @@index([subject_id], map: "idx_qs_subject")
+  @@index([subject_id, question_id], map: "idx_qs_subject_question")
+}
+
+model questions {
+  id                       Int                        @id @default(autoincrement())
+  statement                String
+  option_a                 String
+  option_b                 String
+  option_c                 String
+  option_d                 String?
+  option_e                 String?
+  correct_option           String                     @db.Char(1)
+  difficulty               Int?                       @default(1)
+  exam_id                  Int?
+  created_at               DateTime?                  @default(now()) @db.Timestamp(6)
+  question_subjects        question_subjects[]
+  exams                    exams?                     @relation(fields: [exam_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  simulated_exam_questions simulated_exam_questions[]
+
+  @@index([difficulty], map: "idx_questions_difficulty")
+  @@index([exam_id], map: "idx_questions_exam")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model questions_enem {
+  id                            Int                             @id @default(autoincrement())
+  statement                     String
+  option_a                      String
+  option_b                      String
+  option_c                      String
+  option_d                      String
+  option_e                      String?
+  correct_option                String                          @db.Char(1)
+  difficulty                    Int?                            @default(1)
+  exam_id                       Int
+  created_at                    DateTime?                       @default(now()) @db.Timestamp(6)
+  question_subjects_enem        question_subjects_enem[]
+  exams_enem                    exams_enem                      @relation(fields: [exam_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_exam")
+  simulated_exam_questions_enem simulated_exam_questions_enem[]
+
+  @@index([exam_id], map: "idx_questions_exam_enem")
+}
+
+model simulated_exam_questions {
+  id                Int              @id @default(autoincrement())
+  simulated_exam_id Int?
+  question_id       Int?
+  selected_option   String?          @db.Char(1)
+  is_correct        Boolean?
+  questions         questions?       @relation(fields: [question_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  simulated_exams   simulated_exams? @relation(fields: [simulated_exam_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model simulated_exam_questions_enem {
+  simulated_exam_id Int
+  question_id       Int
+  selected_option   String?         @db.Char(1)
+  is_correct        Boolean?
+  questions_enem    questions_enem  @relation(fields: [question_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  simulated_exams   simulated_exams @relation(fields: [simulated_exam_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([simulated_exam_id, question_id])
+  @@index([simulated_exam_id], map: "idx_sim_exam")
+}
+
+model simulated_exams {
+  id                            Int                             @id @default(autoincrement())
+  user_id                       Int?
+  total_questions               Int
+  correct_answers               Int
+  score                         Decimal?                        @db.Decimal(5, 2)
+  created_at                    DateTime?                       @default(now()) @db.Timestamp(6)
+  duration_seconds              Int?
+  simulated_exam_questions      simulated_exam_questions[]
+  simulated_exam_questions_enem simulated_exam_questions_enem[]
+  users                         users?                          @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model subjects {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(100)
+  question_subjects question_subjects[]
+}
+
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model subjects_enem {
+  id                     Int                      @id @default(autoincrement())
+  name                   String                   @db.VarChar(100)
+  question_subjects_enem question_subjects_enem[]
+}
+
+model users {
+  id                        Int               @id @default(autoincrement())
+  name                      String?           @db.VarChar(100)
+  email                     String            @unique @db.VarChar(150)
+  password_hash             String?
+  created_at                DateTime?         @default(now()) @db.Timestamp(6)
+  plan                      String?           @default("trial") @db.VarChar(20)
+  subscription_status       String?           @default("trial") @db.VarChar(20)
+  trial_end                 DateTime?         @db.Timestamp(6)
+  gateway_customer_id       String?           @db.VarChar(255)
+  gateway_subscription_id   String?           @db.VarChar(255)
+  subscription_started_at   DateTime?         @db.Timestamp(6)
+  subscription_cancelled_at DateTime?         @db.Timestamp(6)
+  cancel_at_period_end      Boolean?          @default(false)
+  is_admin                  Boolean?          @default(false)
+  simulated_exams           simulated_exams[]
+}

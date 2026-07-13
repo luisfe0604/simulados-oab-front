@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Rubi — Sistema de design "Rubi & Toga"
+   Universo do Direito brasileiro: pergaminho, tinta, rubi (anel da Ordem),
+   ouro-velho (toga) e verde judicial. Rubi é cor arquitetural, não enfeite.
+   ========================================================================== */
+
+:root {
+  /* Base — pergaminho e tinta */
+  --ink: #221c1a;
+  --ink-soft: #4b423d;
+  --ink-faint: #7a6f68;
+  --bone: #e9e5dc;
+  --surface: #f6f3ec;
+  --surface-2: #efebe1;
+  --line: #d9d2c5;
+  --line-strong: #c7bda e;
+
+  /* Marca — rubi (anel de rubi / Vade Mecum) */
+  --rubi: #7b1e2b;
+  --rubi-deep: #5a141e;
+  --rubi-bright: #9d2c3a;
+  --rubi-wash: #f0e3e2;
+
+  /* Acentos */
+  --ouro: #b08d57; /* ouro-velho / toga */
+  --ouro-deep: #8a6d3f;
+  --verde: #2e5e4e; /* verde judicial — acerto/aprovado */
+  --verde-wash: #e2ebe4;
+  --erro: #a33a2c; /* erro — distinto do rubi da marca */
+  --erro-wash: #f2e2de;
+
+  /* Tipografia */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Archivo", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Escala de tipo */
+  --step--1: clamp(0.78rem, 0.75rem + 0.15vw, 0.86rem);
+  --step-0: clamp(0.94rem, 0.9rem + 0.2vw, 1rem);
+  --step-1: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
+  --step-2: clamp(1.4rem, 1.2rem + 1vw, 1.85rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 2.8rem);
+  --step-4: clamp(2.6rem, 1.9rem + 3.4vw, 4.2rem);
+
+  /* Formas e sombras */
+  --radius: 4px;
+  --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgba(34, 28, 26, 0.06);
+  --shadow-md: 0 8px 24px -12px rgba(34, 28, 26, 0.28);
+  --shadow-lg: 0 24px 60px -24px rgba(34, 28, 26, 0.4);
+
+  --sidebar-w: 250px;
+}
+
+/* Correção de um valor de token (evita erro de espaço acima) */
+:root {
+  --line-strong: #c7bdae;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+}
+
+body {
+  background-color: var(--bone);
+  /* Textura sutil de papel: grão quase imperceptível */
+  background-image: radial-gradient(
+    rgba(34, 28, 26, 0.022) 1px,
+    transparent 1px
+  );
+  background-size: 3px 3px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--rubi);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rubi);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Tipografia utilitária
+   -------------------------------------------------------------------------- */
+.display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rubi);
+  font-weight: 500;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+}
+
+/* --------------------------------------------------------------------------
+   Botões
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  transition:
+    transform 0.12s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+  white-space: nowrap;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--rubi);
+  color: #fdf7f2;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--rubi-deep);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--ink);
+  background: var(--surface);
+}
+
+.btn-gold {
+  background: var(--ouro);
+  color: #2a2013;
+}
+.btn-gold:hover:not(:disabled) {
+  background: var(--ouro-deep);
+  color: #fff;
+}
+
+.btn-block {
+  width: 100%;
+}
+.btn-lg {
+  padding: 0.95rem 1.6rem;
+  font-size: var(--step-1);
+}
+
+/* --------------------------------------------------------------------------
+   Superfícies
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.field-label {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.72rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  color: var(--ink);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--rubi);
+  box-shadow: 0 0 0 3px var(--rubi-wash);
+}
+.textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Badges / etiquetas de status
+   -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 100px;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.badge-gold {
+  background: rgba(176, 141, 87, 0.16);
+  color: var(--ouro-deep);
+}
+.badge-green {
+  background: var(--verde-wash);
+  color: var(--verde);
+}
+.badge-muted {
+  background: var(--surface-2);
+  color: var(--ink-faint);
+}
+.badge-rubi {
+  background: var(--rubi-wash);
+  color: var(--rubi);
+}
+
+/* --------------------------------------------------------------------------
+   Utilidades
+   -------------------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

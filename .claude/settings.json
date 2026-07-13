@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "C:\\Users\\luife\\Desktop\\Pessoal\\Arquivos\\Freelas\\Kalil\\backend"
+    ],
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit(C:\\Users\\luife\\Desktop\\Pessoal\\Arquivos\\Freelas\\Kalil\\frontend\\**)",
+      "Write(C:\\Users\\luife\\Desktop\\Pessoal\\Arquivos\\Freelas\\Kalil\\frontend\\**)",
+      "Bash(npm run *)",
+      "Bash(npm test*)",
+      "Bash(npm install)",
+      "Bash(npm ci)",
+      "Bash(npx create-next-app*)",
+      "Bash(npx next*)",
+      "Bash(next *)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git branch*)",
+      "Bash(git checkout -b *)",
+      "Bash(git checkout migracao-nextjs)"
+    ],
+    "ask": [
+      "Bash(npm install *)",
+      "Bash(npm uninstall*)",
+      "Bash(git push*)",
+      "Bash(git merge*)",
+      "Bash(git checkout master)",
+      "Bash(git checkout main)",
+      "Bash(vercel env add*)",
+      "Bash(vercel *)"
+    ],
+    "deny": [
+      "Edit(C:\\Users\\luife\\Desktop\\Pessoal\\Arquivos\\Freelas\\Kalil\\backend\\**)",
+      "Write(C:\\Users\\luife\\Desktop\\Pessoal\\Arquivos\\Freelas\\Kalil\\backend\\**)",
+      "Bash(rm -rf*)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Bash(git branch -D*)"
+    ]
+  }
+}
